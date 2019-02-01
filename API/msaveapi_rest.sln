@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalRestAPI", "msaveapi_rest\PortalRestAPI.csproj", "{066AF902-F5D8-400A-9509-A6472E6522E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "Tester\Tester.csproj", "{C910B58F-0177-4907-B692-7928503D23A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{066AF902-F5D8-400A-9509-A6472E6522E1}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{066AF902-F5D8-400A-9509-A6472E6522E1}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{066AF902-F5D8-400A-9509-A6472E6522E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{066AF902-F5D8-400A-9509-A6472E6522E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C910B58F-0177-4907-B692-7928503D23A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C910B58F-0177-4907-B692-7928503D23A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C910B58F-0177-4907-B692-7928503D23A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C910B58F-0177-4907-B692-7928503D23A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89F9E346-2C17-4473-9454-BCE9B48F9DA0}
+	EndGlobalSection
+EndGlobal
