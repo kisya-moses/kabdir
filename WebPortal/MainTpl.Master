@@ -1,0 +1,191 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainTpl.master.cs" Inherits="WebPortal.MainTpl" %>
+<%@ Import Namespace="System.Web.Optimization" %>
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>{KABD}</title>
+    <base href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"%>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <%: Styles.Render("~/bundles/css") %>
+    <%: Scripts.Render("~/bundles/js") %>
+</head>
+<body>
+    <form runat="server">
+        <div id="container">
+            <header id="header" class="navbar navbar-static-top">
+                <div class="container-fluid">
+                    <div id="header-logo" class="navbar-header">
+                        <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"%>" class="navbar-brand">
+                            <img src="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"%>images/logo.png" alt="{KABD}" title="{KABD}" /></a>
+                    </div>
+                    <a href="#" id="button-menu" class="hidden-md hidden-lg"><span class="fa fa-bars"></span></a>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"%>image/cache/profile-45x45.png" alt="User name" title="username" id="user-profile" class="img-circle" />
+                            <asp:Literal runat="server" ID="username" Text="USERNAME"></asp:Literal>
+                            <i class="fa fa-caret-down fa-fw"></i></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/admin/"+"profile.aspx"%>">
+                                    <i class="fa fa-user-circle-o fa-fw"></i>Your Profile</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li>
+                                    <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/default.aspx" %>" target="_blank">Front End</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/ulogin.aspx?"+"logout=true"%>"><i class="fa fa-sign-out"></i>
+                                <span class="hidden-xs hidden-sm hidden-md">Logout</span>
+                            </a></li>
+                    </ul>
+                </div>
+            </header>
+            <nav id="column-left">
+                <div id="navigation"><span class="fa fa-bars"></span>Navigation</div>
+                <ul id="menu">
+                    <li id="menu-dashboard"><a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>dashboard.aspx">
+                        <i class="fa fa-dashboard fw"></i>Dashboard</a>
+                    </li>
+                <% if (HttpContext.Current.User.IsInRole("BUSINESS"))%>
+                    <% { %>
+                    <li id="menu-catalog">
+                        <a href="#collapse1" data-toggle="collapse" class="parent collapsed"><i class="fa fa-tags fw"></i>Catalog</a>
+                        <ul id="collapse1" class="collapse">
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>ProductCategories.aspx">Product Categories</a>          
+                            </li>
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>products.aspx">Product Stock</a>          
+                            </li>
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>sales.aspx">Sales Made</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <% }%> 
+                <% if (HttpContext.Current.User.IsInRole("DELIVERY"))%>
+                    <% { %>
+                    <li id="menu-catalog2">
+                        <a href="#collapse11" data-toggle="collapse" class="parent collapsed"><i class="fa fa-tags fw"></i>Catalog</a>
+                        <ul id="collapse11" class="collapse">
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>deliveries.aspx">Order Deliveries</a>
+                            </li>
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>orderdelivery.aspx">Delivery Settings</a>          
+                            </li>
+                        </ul>
+                    </li>
+                    <% }%> 
+                    <%if(HttpContext.Current.User.IsInRole("ADMIN")) { %>
+                    <li id="menu-sale"><a href="#collapse26" data-toggle="collapse" class="parent collapsed">
+                        <i class="fa fa-shopping-cart fw"></i>Sales</a>
+                        <ul id="collapse26" class="collapse">
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>orders.aspx">Orders</a>          
+                            </li>
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>returns.aspx">Returns</a>          
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="menu-customer">
+                        <a href="#collapse33" data-toggle="collapse" class="parent collapsed">
+                            <i class="fa fa-user fw"></i>Customers
+                        </a>
+                        <ul id="collapse33" class="collapse">
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>customers.aspx">Customers</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="menu-marketing"><a href="#collapse38" data-toggle="collapse" class="parent collapsed"><i class="fa fa-share-alt fw"></i>Marketing</a>
+                        <ul id="collapse38" class="collapse">
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>mailusers.aspx">Mail</a>          
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="menu-system"><a href="#collapse42" data-toggle="collapse" class="parent collapsed"><i class="fa fa-cog fw"></i>System</a>
+                        <ul id="collapse42" class="collapse">
+                            <li>
+                                <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>systemsettings.aspx">Settings</a>          
+                            </li>
+                            <li>
+                                <a href="#collapse43" data-toggle="collapse" class="parent collapsed">Management</a>
+                                <ul id="collapse43" class="collapse">
+                                    <li>
+                                        <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>usermanagement.aspx">User Management</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>apiusers.aspx">API</a>
+                                    </li>
+                                    <li>
+                                        <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>products.aspx">Products</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#collapse47" data-toggle="collapse" class="parent collapsed">
+                                    Localisation
+                                </a>
+                                <ul id="collapse47" class="collapse">
+                                    <li>
+                                        <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>languages.aspx">Languages</a>               
+                                    </li>
+                                    <li>
+                                        <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>currencies.aspx">Currencies</a>
+                                    </li>
+                                    <li>
+                                        <a href="#<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/"%>businesscategories">Business Categories</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#collapse60" data-toggle="collapse" class="parent collapsed">Maintenance</a>
+                                <ul id="collapse60" class="collapse">
+                                    <li>
+                                        <a href="<%=Request.Url.Scheme + "://" + Request.Url.Authority + Request.ApplicationPath.TrimEnd('/') + "/"+"admin/auditlogs.aspx"%>">Error Logs</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <%} %>
+
+            </nav>
+            <div id="content">
+                <asp:ContentPlaceHolder runat="server" ID="TemplateData">
+                </asp:ContentPlaceHolder>
+            </div>
+            <footer id="footer">
+                <a href="http://www.doopisoft.com/">KABD</a> 
+                &copy;<%=DateTime.Now.Year %> Copyright Doopisoft Limited.<br />
+                Version 1.0.0.1
+            </footer>
+        </div>
+    </form>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("select").select2();
+            Dropzone.autoDiscover = false;
+            //Simple Dropzonejs 
+            $("#dZUpload").dropzone({
+                url: "<%="ClipUploadHandler.ashx"%>",
+                addRemoveLinks: true,
+                success: function (file, response) {
+                    var imgName = response;
+                    file.previewElement.classList.add("dz-success");
+                    console.log("Successfully uploaded :" + imgName);
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
