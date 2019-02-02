@@ -18,31 +18,25 @@ namespace WebPortal.Admin
                 }
                 else
                 {
-                    DataTable dt1 = dh.GetData("GetAllBusinessCategory", null);
-                    DataTable dt2 = dh.GetData("GetAllDistricts", null);
-                    PCategory.DataSource = dt1;
-                    District.DataSource = dt2;
+                    DataTable dt1 = dh.GetData("GetAllBusiness", null);
+                    inputmanufacturer.DataSource = dt1;
                     ///////////////////////////
-                    PCategory.DataTextField = "Name";
-                    PCategory.DataValueField = "ID";
-
-                    District.DataTextField = "Name";
-                    District.DataValueField = "ID";
-                    District.DataBind();
+                    inputmanufacturer.DataTextField = "Name";
+                    inputmanufacturer.DataValueField = "ID";
+                    inputmanufacturer.DataBind();
                 }
             }
         }
 
         protected void EditProfile_Click(object sender, EventArgs e)
         {
-            dh.InsertData("AddProduct", new object[] {
-        @Quantity varchar(50)
-        ,@Supplier varchar(50)
-        ,@BusinessName varchar(50)
-        ,@ISBN varchar(50)
-        ,@Width varchar(50)
-        ,@Height varchar(50)
-        ,@Weight varchar(50)
+            dh.InsertData("AddProduct", new object[] { inputquantity.Text
+        ,""
+        ,inputmanufacturer.SelectedItem.Text.ToString()
+        ,inputisbn.Text
+        ,inputwidth.Text
+        ,inputheight.Text
+        ,input
         ,@TaxAmount varchar(50)
         ,@Discount varchar(50)
         ,@Price varchar(50)

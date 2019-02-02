@@ -19,38 +19,14 @@ namespace PortalAPI_rest.Logic
     public class BusinessLogic
     {
         DatabaseHandler dh = new DatabaseHandler();
-
+        WebPortal.Logic.UserHandler uh = new WebPortal.Logic.UserHandler();
+        WebPortal.Logic.DatabaseHandler wdh = new WebPortal.Logic.DatabaseHandler();
+        WebPortal.Logic.StringHandler sh = new WebPortal.Logic.StringHandler();
         public string Signature { get; private set; }
-
-        internal APIResponse GetAPIResponse(APIRequest request)
+        internal APIResponse GetBusinesses(Business request)
         {
             APIResponse resp = new APIResponse();
-            DataTable dt = null;
-            resp.Response = "";
 
-            //if get all distiicts
-            if (request != null)
-            {
-                string[] data = null;
-                switch (request.Field1.ToUpper())
-                {
-                    case "DISTRICTS":
-                        dt = dh.GetData("District_Select_Row", data);
-                        resp.Response = JsonConvert.SerializeObject(new { Message = "SUCCESS", Data = dt });
-                        break;
-
-                    case "USERS":
-                        //data = new string[] { request.Field2};
-                        dt = dh.GetData("GetAllUsers", null);
-                        resp.Response = JsonConvert.SerializeObject(new { Message = "SUCCESS", Data = dt });
-                        break;
-
-                }
-            }
-            else
-            {
-
-            }
             return resp;
         }
 
@@ -81,35 +57,6 @@ namespace PortalAPI_rest.Logic
             return Signature;
         }
 
-        internal APIResponse AddStreet(Street request)
-        {
-            APIResponse resp = new APIResponse();
-            resp.Response =  "";
-            //@streetcode varchar(50),
-            //@streetname varchar(50),
-            //@village varchar(50),
-            //@grade varchar(50)
-
-            string[] data = {
-                request.Code, request.Name,
-                request.VillageID, request.TaxGradeID,
-                DateTime.Now.ToString(), request.UserID
-            };
-            bool done = dh.InsertData("Insert_Street_Row", data);
-            if (done)
-            {
-                resp.StatusCode = "0";
-                resp.StatusDescription = "Street Add/Edit Success";
-                resp.Response = JsonConvert.SerializeObject(new { Message = "SUCCESS" });
-            }
-            else
-            {
-                resp.StatusCode = "100";
-                resp.StatusDescription = "Street Add/Edit Failed";
-                resp.Response = JsonConvert.SerializeObject(new { Message = "FAILED" });
-            }
-            return resp;
-        }
 
         internal APIResponse UserLogin(Credentials request)
         {
@@ -134,7 +81,7 @@ namespace PortalAPI_rest.Logic
                 {
                     resp.StatusCode = "100";
                     resp.StatusDescription = "User Not Found";
-                    resp.Response = JsonConvert.SerializeObject(new { Message = "FAILED"});
+                    resp.Response = JsonConvert.SerializeObject(new { Message = "FAILED" });
                 }
             }
             catch (Exception e)
@@ -147,24 +94,26 @@ namespace PortalAPI_rest.Logic
         internal APIResponse AddSytemUser(SystemUser request)
         {
             APIResponse resp = new APIResponse();
-            resp.Response = "";
-            //@UserId varchar(50),
-            //@Email varchar(50),
-            //@FirstName varchar(50),
-            //@LastName varchar(50),
-            //@OtherName varchar(50),
-            //@Usertype varchar(50),
-            //@Password varchar(50),
-            //@IsActive bit,
-            //@BankCode varchar(50),
-            //@CreatedBy varchar(50),
-            //@ModifiedBy varchar(50),
-            //@ApprovedBy varchar(50),
-            //@PhoneNumber varchar(50),
-            //@BranchCode varchar(50),
-            //@DateOfBirth varchar(50),
-            //@Gender varchar(50),
-            //@TranAmountLimit varchar(50)
+            resp.Response = uh.Register(request.FirstName, request.LastName,
+                request.Gender, request.DistrictID, "",
+                request.DistrictID, request.Email,
+                request.PhoneNumber, "0", request.UserType, request.DateOfBirth
+                );
+            return resp;
+        }
+
+        internal APIResponse UserReset(string emailOrPhone)
+        {
+            APIResponse resp = new APIResponse();
+            resp.Response = uh.ResetPwd(emailOrPhone);
+            if (resp.Response == "SUCCESS")
+            {
+                resp.StatusCode = "0";
+            }
+            else
+            {
+                resp.StatusCode = "100";
+            }
             return resp;
         }
 

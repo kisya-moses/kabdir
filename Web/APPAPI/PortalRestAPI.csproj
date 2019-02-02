@@ -55,22 +55,13 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\PortalApiController.cs" />
-    <Compile Include="Entities\APIRequest.cs" />
     <Compile Include="Entities\APIResponse.cs" />
-    <Compile Include="Entities\BusinessCategory.cs" />
     <Compile Include="Entities\BusinessType.cs" />
     <Compile Include="Entities\Credentials.cs" />
     <Compile Include="Entities\Log.cs" />
     <Compile Include="Entities\SubCounty.cs" />
-    <Compile Include="Entities\District.cs" />
-    <Compile Include="Entities\LicenceFee.cs" />
-    <Compile Include="Entities\Street.cs" />
     <Compile Include="Entities\SystemUser.cs" />
     <Compile Include="Entities\Business.cs" />
-    <Compile Include="Entities\RevenuePayment.cs" />
-    <Compile Include="Entities\SystemSetting.cs" />
-    <Compile Include="Entities\UssdRequest.cs" />
-    <Compile Include="Entities\Village.cs" />
     <Compile Include="Logic\BusinessLogic.cs" />
     <Compile Include="Logic\DatabaseHandler.cs" />
     <Compile Include="Global.asax.cs">
@@ -160,6 +151,12 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebPortal\WebPortal.csproj">
+      <Project>{1f11c284-bb8a-4a27-ad24-b48cb9168e89}</Project>
+      <Name>WebPortal</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

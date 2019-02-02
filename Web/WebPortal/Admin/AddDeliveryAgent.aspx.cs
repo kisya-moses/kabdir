@@ -20,6 +20,8 @@ namespace WebPortal.Admin
                 {
                     DataTable dt1 = dh.GetData("GetAllBusinessCategory", null);
                     DataTable dt2 = dh.GetData("GetAllDistricts", null);
+                    District.DataSource = dt2;
+                    District.DataBind();
                 }
             }
         }
@@ -39,5 +41,13 @@ namespace WebPortal.Admin
             });
         }
 
+        protected void District_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DataTable dt3 = dh.GetData("GetAllDivisions", new string[] { District.SelectedValue.ToString() });
+            Division.DataSource = dt3;
+            Division.DataTextField = "Name";
+            Division.DataValueField = "ID";
+            Division.DataBind();
+        }
     }
 }

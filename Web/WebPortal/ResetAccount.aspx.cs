@@ -72,7 +72,7 @@ namespace WebPortal
                     +link+"\n\n"+"Regards";
                 bool tbl = dh.InsertData("ResetAccount", new object[] { token, email, DateTime.Now.ToString() });
                 eh.SendEmail(email, txt, subj);
-                msg.Text = "An Email Has Been Sent To The Address You Gave IF It Exists In The System";
+                msg.Text = "An Email Has Been Sent To The Address You Gave If It Exists In The System";
                 uname.Visible = false;
                 lbl1.Visible = false;
                 ResetBtn.Visible = false;

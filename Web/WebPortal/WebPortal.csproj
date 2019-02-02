@@ -619,6 +619,7 @@
     <Compile Include="Logic\EmailHandler.cs" />
     <Compile Include="Logic\Encrypt.cs" />
     <Compile Include="Logic\StringHandler.cs" />
+    <Compile Include="Logic\UserHandler.cs" />
     <Compile Include="MainTpl.Master.cs">
       <DependentUpon>MainTpl.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
